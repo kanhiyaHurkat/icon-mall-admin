@@ -1,16 +1,15 @@
 import React from 'react';
 import './App.css';
 import Login from "./components/auth/login/Login";
-import {Route, Routes, useNavigate,} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import Home from "./components/home/Home";
 import Register from "./components/auth/register/Register";
 import ForgotPassword from "./components/auth/forgot-password/ForgotPassword";
 import {PrivateRoute} from "./components/auth/private-route/PrivateRoute";
 import TopNavigation from "./components/layout/TopNavigation";
-import {alertActions} from "./actions/alert.action";
+import {alertActions, userActions} from "./actions";
 import {connect} from "react-redux";
 import {AuthGuardRoute} from "./components/auth/auth-guard";
-import {userActions} from "./actions/user.action";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +27,9 @@ function App(props: any) {
     <>
       <TopNavigation logout={handleLogout}/>
       <Routes>
+        <Route path="/" element={
+          <Navigate to={'/home'}/>
+        }/>
         <Route path="/home" element={
           <PrivateRoute>
             <Home/>
